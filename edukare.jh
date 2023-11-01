@@ -1,0 +1,87 @@
+
+entity TestItem {
+	name String required
+    description String
+    interactionType String
+    outcome String
+}
+
+entity Outcome {
+	outcome String
+    testId String
+}
+
+
+entity InteractionAttribute{
+     interactionValue String required
+}
+
+
+entity TestPart {
+	testPart String
+    testSection String
+    
+}
+
+entity UserTest{
+    testName String
+    testType String
+}
+
+
+entity Result {
+   	result Long required
+}
+
+entity TestSection {
+	testSection String required
+    testItem String
+   
+}
+
+
+entity InteractionType {
+	title String
+	description String
+    interactionValue String
+}
+
+
+entity Test {
+	testPart String
+    testId Long
+    userId Long
+}
+
+entity User {
+  id Long
+  firstName String
+  lastName String
+  email String
+  address String
+}
+
+
+relationship OneToOne {
+	Outcome{testId} to Test
+}
+
+
+relationship OneToMany {
+	Test to TestPart{testPart}
+    Test to Result{testPart}
+    UserTest to Result{testPart}
+    User to Result{testPart}
+    TestSection to TestItem{testItem}
+    TestPart to TestSection{testSection}
+    User to Test{userId}
+    InteractionType to InteractionAttribute{interactionValue}
+    
+}
+    
+
+
+
+
+
+
